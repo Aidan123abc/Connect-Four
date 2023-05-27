@@ -17,12 +17,16 @@ char** initBoard(){
 }
 
 void printBoard(char** board) {
+        printf("\n  1   2   3   4   5   6   7\n");
+        printf("____________________________\n");
         for(int i = 0; i < 6; i++){
-                for(int j = 0; j < 7; j++){
-                        printf("%c ", board[i][j]);
+                printf("|_%c_|", board[i][0]);
+                for(int j = 1; j < 7; j++){
+                        printf("_%c_|", board[i][j]);
                 }
                 printf("\n");
         }
+        printf("\n");
 }
 
 void freeBoard(char** board){
