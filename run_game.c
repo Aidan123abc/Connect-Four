@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 char** initBoard(){
         char** board = (char**)malloc(6 * sizeof(char*));
@@ -36,16 +37,45 @@ void freeBoard(char** board){
         free(board);
 }
 
-void insertPiece(char** board, int col, char color) {
-        int i = 0;
-        while (board[i][col] != 'O') {
-                i++;
+void insertPiece(char*** board, int col, char color) {
+        fprintf(stderr, "in function %d\n", col);
+        int i = 5;
+        while ((*board)[i][col] != 'O') {
+                fprintf(stderr, "%c\n", (*board)[i][col]);
+                i--;
+                if (i == -1) break;
         }
-        board[i][col] = color;
+        if (i >= 0) (*board)[i][col] = color;
+        else printf("No space here. Try Again: \n");
 }
 
 int main(int argc, char *argv[]) {
         char** board = initBoard();
+
+        char input;
+        int player = 1; 
+
         printBoard(board);
+        printf("Enter a column 1-7 (press 'q' to quit): \n");
+
+        while (1) {
+                scanf(" %c", &input);
+                if (input == 'q') {
+                printf("Exiting the program.\n");
+                break;
+                }
+                if (input >= '1' && input <= '7') {
+                        if (player == 1) {
+                                insertPiece(&board, input - 1, 'R');
+                                printBoard(board);
+                        } else {
+                                insertPiece(&board, input - 1, 'R');
+                                printBoard(board);
+                        }
+                } else {
+                        printf("Incorrect Input.\n\n");
+                }
+                printf("Enter a column 1-7 (press 'q' to quit): \n");
+        }
         freeBoard(board);
 }
