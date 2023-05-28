@@ -52,6 +52,17 @@ void insertPiece(char*** board, int col, char color) {
 int main(int argc, char *argv[]) {
         char** board = initBoard();
 
+        char playerColor = 'R';
+        char computerColor;
+
+
+        printf("input the computers color (R/Y). Red goes first: ");
+        scanf("%c", &computerColor);
+
+        if(computerColor == 'R') playerColor = 'Y';
+
+        printf("computer color: %c, player color: %c", computerColor, playerColor);
+
         char input;
         int player = 1; 
 
