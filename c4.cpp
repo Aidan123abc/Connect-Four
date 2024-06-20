@@ -36,9 +36,14 @@ void printBoard(Board &board)
     {
         for (int c = 0; c < COLUMN_COUNT; ++c)
         {
-            cout << "|_" << board[r][c] << "_|";
+            if (board[r][c] == 0) {
+                cout << "|___|";
+            } else {
+                cout << "|_" << board[r][c] << "_|";
+            }
         }
         cout << endl;
+        cout << "___________________________________\n";
     }
     cout << endl;
 }
